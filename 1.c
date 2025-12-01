@@ -4,6 +4,117 @@
 #include <float.h>
 #include <locale.h>
 
+void calculate_value();
+double f(double x);
+void calculate_value();
+void build_table();
+void find_extremum();
+void find_x_by_y();
+void calculate_derivative();
+void calculate_integral();
+
+
+
+
+
+
+
+int main() {
+
+
+    setlocale(LC_CTYPE, "RUS");
+    int choice;
+
+
+    printf("\n");
+    printf("                              *************************************************************\n");
+    printf("                              *                                                           *\n");
+    printf("                              *                      Курсовой проект                      *\n");
+    printf("                              *          Конструирование программы анализа функции        *\n");
+    printf("                              *                  Выполнил: Капустин А. И.                 *\n");
+    printf("                              *              Руководитель: Минакова О. В.                 *\n");
+    printf("                              *                    Группа: бИЦ-252                        *\n");
+    printf("                              *                                                           *\n");
+    printf("                              *************************************************************\n");
+    printf("\n\n\n");
+
+
+
+
+    printf("                              *************************************************************\n");
+    printf("                              *                      АНАЛИЗ ФУНКЦИИ                       *\n");
+    printf("                              *           __                                              *\n");
+    printf("                              *          |  (tan^-1 (x)) / x,               x < -2        *\n");
+    printf("                              *   f(x) = |                                                *\n");
+    printf("                              *          |   (x^4 - 16) / (x-2),            x >= 2        *\n");
+    printf("                              *          |                                                *\n");
+    printf("                              *          |    16                                          *\n");
+    printf("                              *          |    ___    ((-1)^n * x^(2n+1))                  *\n");
+    printf("                              *          |    \\     ______________________, -2 <= x < 2  *\n");
+    printf("                              *          |    /__    ((2n+1) * sqrt(n+2))                 *\n");
+    printf("                              *          |__  n = 0                                       *\n");
+    printf("                              *                                                           *\n");
+    printf("                              *************************************************************\n");
+    printf("\n\n\n");
+
+
+    do {
+        printf("\n\n\n");
+        printf("                              *************************************************************\n");
+        printf("                              *                                                           *\n");
+        printf("                              *                       ГЛАВНОЕ МЕНЮ                        *\n");
+        printf("                              *                                                           *\n");
+        printf("                              *        1. Значение функции в точке                        *\n");
+        printf("                              *        2. Таблица значений                                *\n");
+        printf("                              *        3. Поиск минимального/максимального значения       *\n");
+        printf("                              *        4. Поиск X по Y                                    *\n");
+        printf("                              *        5. Производная в точке                             *\n");
+        printf("                              *        6. Вычисление интеграла                            *\n");
+        printf("                              *        7. Выход                                           *\n");
+        printf("                              *                                                           *\n");
+        printf("                              *************************************************************\n");
+        printf("\n\n\n");
+        printf("Выберите пункт: ");
+
+        if (scanf_s("%d", &choice) != 1) {
+            printf("Ошибка ввода!\n");
+            while (getchar() != '\n');
+            continue;
+        }
+
+        switch (choice) {
+        case 1:
+            calculate_value();
+            break;
+        case 2:
+            build_table();
+            break;
+        case 3:
+            find_extremum();
+            break;
+        case 4:
+            find_x_by_y();
+            break;
+        case 5:
+            calculate_derivative();
+            break;
+        case 6:
+            calculate_integral();
+            break;
+        case 7:
+            printf("Выход из программы.\n");
+            break;
+        default:
+            printf("Неверный выбор! Попробуйте снова.\n");
+            break;
+        }
+    } while (choice != 7);
+
+    return 0;
+}
+
+
+
 // Функция Сигмы
 double sigma(double x) {
     double sumx = 0.0;
@@ -22,10 +133,10 @@ double f(double x) {
         return (1.0 / x * (tan(x)));
     }
     if (-2.0 <= x < 2.0) {
-        return (pow(x,4) - 16.0) / (x - 2.0);
+        return sigma(x);
     }
     if (x >= 2.0) {
-        return sigma(x);
+        return (pow(x, 4) - 16.0) / (x - 2.0);
     }
 }
 
@@ -268,98 +379,4 @@ void calculate_integral() {
     else {
         printf("Интеграл ? %.6lf\n", sum * h);
     }
-}
-
-int main() {
-
-
-    setlocale(LC_CTYPE, "RUS");
-    int choice;
-
-
-    printf("\n");
-    printf("                              *************************************************************\n");
-    printf("                              *                                                           *\n");
-    printf("                              *                      Курсовой проект                      *\n");
-    printf("                              *          Конструирование программы анализа функции        *\n");
-    printf("                              *                  Выполнил: Капустин А. И.                 *\n");
-    printf("                              *              Руководитель: Минакова О. В.                 *\n");
-    printf("                              *                    Группа: бИЦ-252                        *\n");
-    printf("                              *                                                           *\n");
-    printf("                              *************************************************************\n");
-    printf("\n\n\n");
-
-
-
-
-    printf("                              *************************************************************\n");
-    printf("                              *                      АНАЛИЗ ФУНКЦИИ                       *\n");
-    printf("                              *           __                                              *\n");
-    printf("                              *          |  (tan^-1 (x)) / x,               x < -2        *\n");
-    printf("                              *   f(x) = |                                                *\n");
-    printf("                              *          |   (x^4 - 16) / (x-2),            -2 <= x < 2   *\n");
-    printf("                              *          |                                                *\n");
-    printf("                              *          |    16                                          *\n");
-    printf("                              *          |    ___    ((-1)^n * x^(2n+1))                  *\n");
-    printf("                              *          |    \\     ______________________,  x >= 2       *\n");
-    printf("                              *          |    /__    ((2n+1) * sqrt(n+2))                 *\n");
-    printf("                              *          |__  n = 0                                       *\n");
-    printf("                              *                                                           *\n");
-    printf("                              *************************************************************\n");
-    printf("\n\n\n");
-
-
-    do {
-        printf("\n\n\n");
-        printf("                              *************************************************************\n");
-        printf("                              *                                                           *\n");
-        printf("                              *                       ГЛАВНОЕ МЕНЮ                        *\n");
-        printf("                              *                                                           *\n");
-        printf("                              *        1. Значение функции в точке                        *\n");
-        printf("                              *        2. Таблица значений                                *\n");
-        printf("                              *        3. Поиск минимального/максимального значения       *\n");
-        printf("                              *        4. Поиск X по Y                                    *\n");
-        printf("                              *        5. Производная в точке                             *\n");
-        printf("                              *        6. Вычисление интеграла                            *\n");
-        printf("                              *        7. Выход                                           *\n");
-        printf("                              *                                                           *\n");
-        printf("                              *************************************************************\n");
-        printf("\n\n\n");
-        printf("Выберите пункт: ");
-
-        if (scanf_s("%d", &choice) != 1) {
-            printf("Ошибка ввода!\n");
-            while (getchar() != '\n');
-            continue;
-        }
-
-        switch (choice) {
-        case 1:
-            calculate_value();
-            break;
-        case 2:
-            build_table();
-            break;
-        case 3:
-            find_extremum();
-            break;
-        case 4:
-            find_x_by_y();
-            break;
-        case 5:
-            calculate_derivative();
-            break;
-        case 6:
-            calculate_integral();
-            break;
-        case 7:
-            printf("Выход из программы.\n");
-            break;
-        default:
-            printf("Неверный выбор! Попробуйте снова.\n");
-            break;
-        }
-    } while (choice != 7);
-
-    return 0;
 }
